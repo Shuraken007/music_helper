@@ -15,10 +15,10 @@ class GuitarBoard():
          open_lads.append(cur_tone)
       return open_lads
 
-   def add_tone_to_highlight_map(self, string_num, lad_num, color_alias):
+   def add_tone_to_highlight_map(self, string_num, lad_num, tone):
       if not string_num in self.highligt_map:
          self.highligt_map[string_num] = {}
-      self.highligt_map[string_num][lad_num] = color_alias
+      self.highligt_map[string_num][lad_num] = tone.tone
 
    def is_tone_highlighted(self, string_num, lad_num):
       if not string_num in self.highligt_map:
@@ -27,12 +27,12 @@ class GuitarBoard():
          return
       return self.highligt_map[string_num][lad_num]
 
-   def highlight_tone(self, tone, color_alias):
+   def highlight_tone(self, tone):
       for string_num, open_lad in enumerate(self.open_lads):
          up_delta = tone_calc.calc_delta(tone.tone, open_lad.tone)['up']
          for j in range(0, self.height // 12 + 1):
             if up_delta <= self.height:
-               self.add_tone_to_highlight_map(string_num, up_delta, color_alias)
+               self.add_tone_to_highlight_map(string_num, up_delta, tone)
                up_delta += 12
 
    def remove_highlight(self, tone):
@@ -75,12 +75,12 @@ class GuitarBoard():
       img[2] += "══"
 
    def build_lad(self, img, string_num, lad_num):
-      color_alias = self.is_tone_highlighted(string_num, lad_num)
+      tone_num = self.is_tone_highlighted(string_num, lad_num)
       lad = ""
-      if color_alias:
-         lad += color_utils.get_open_code(color_alias, False)
+      if tone_num is not None:
+         lad += color_utils.get_open_code_by_tone(tone_num, False)
       lad += "▇"
-      if color_alias:
+      if tone_num is not None:
          lad += color_utils.get_close_code()
       return lad
 

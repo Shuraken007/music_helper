@@ -10,11 +10,11 @@ def generate_tone():
 def run_game_guitar_tone(img_boards):
    tone = generate_tone()
 
-   msg = '{}'.format(tone.as_str())
+   msg = '{}'.format(tone.as_colored_str())
    print(msg + "\n\n")
 
    for board in img_boards:
-      board.highlight_tone(tone, 'cyan')
+      board.highlight_tone(tone)
       board.print()
 
    print('\n')
