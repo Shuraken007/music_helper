@@ -27,6 +27,7 @@ if __name__ == '__main__':
    guitar_board = GuitarBoard(Tone(7), [5, 5, 5, 4, 5], 19)
    img_boards = [guitar_board]
    while(1):
+      guitar_board.highlight_open_lads()
       run_game_guitar_tone(img_boards)
       input()
       print('\n\n\n----------------')

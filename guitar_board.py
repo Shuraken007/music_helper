@@ -27,6 +27,10 @@ class GuitarBoard():
          return
       return self.highligt_map[string_num][lad_num]
 
+   def highlight_open_lads(self):
+      for string_num, open_lad in enumerate(self.open_lads):
+         self.add_tone_to_highlight_map(string_num, 0, open_lad)
+
    def highlight_tone(self, tone):
       for string_num, open_lad in enumerate(self.open_lads):
          up_delta = tone_calc.calc_delta(tone.tone, open_lad.tone)['up']
