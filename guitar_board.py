@@ -71,7 +71,7 @@ class GuitarBoard():
          for string_num in range(0, width):
             color_alias = self.is_tone_highlighted(string_num, i-1)
             if color_alias:
-               img[i] += color_utils.get_open_code(color_alias, False, False)
+               img[i] += color_utils.get_open_code(color_alias, False, True)
             img[i] += "▇"
             if color_alias:
                img[i] += color_utils.get_close_code()

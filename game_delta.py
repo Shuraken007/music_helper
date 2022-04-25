@@ -9,7 +9,7 @@ def generate_tone():
    num = random.randint(0, 11)
    return Tone(num)
 
-def run_test(img_boards):
+def run_delta_test(img_boards):
    first_tone = generate_tone()
    second_tone = generate_tone()
 
@@ -20,7 +20,6 @@ def run_test(img_boards):
    print(msg + "\n\n")
 
    for board in img_boards:
-      board.reset_highlight()
       board.highlight_tone(first_tone, 'yellow')
       board.highlight_tone(second_tone, 'cyan')
       board.print()
@@ -36,7 +35,7 @@ if __name__ == '__main__':
    guitar_board = GuitarBoard(Tone(7), [5, 5, 5, 4, 5], 19)
    img_boards = [piano_board, guitar_board]
    while(1):
-      run_test(img_boards)
+      run_delta_test(img_boards)
       input()
       print('\n\n\n----------------')
       for board in img_boards:
