@@ -20,6 +20,13 @@ class GuitarBoard():
          self.highligt_map[string_num] = {}
       self.highligt_map[string_num][lad_num] = color_alias
 
+   def is_tone_highlighted(self, string_num, lad_num):
+      if not string_num in self.highligt_map:
+         return
+      if not lad_num in self.highligt_map[string_num]:
+         return
+      return self.highligt_map[string_num][lad_num]
+
    def highlight_tone(self, tone, color_alias):
       for string_num, open_lad in enumerate(self.open_lads):
          up_delta = tone_calc.calc_delta(tone.tone, open_lad.tone)['up']
@@ -44,50 +51,84 @@ class GuitarBoard():
    def reset_highlight(self):
       self.highligt_map.clear()
 
-   def build_grief_img(self, lads_display_num):
+   def build_open_lads_img(self):
       img = []
-      for i in range(0, lads_display_num + 2):
-         img.append("")
-      self.add_left_board(img, lads_display_num)
-      self.add_inner(img, len(self.open_lads), lads_display_num)
-      self.add_right_board(img, lads_display_num)
+      for i in range(0, 3):
+         img.append('')
+      self.add_open_lads_left_board(img)
+      self.add_open_lads_inner(img, len(self.open_lads))
+      self.add_open_lads_right_board(img)
       return img
 
-   def add_left_board(self, img, height):
-      for i in range(2, height + 2):
-         img[i] += " _"
-      img[1] += "░░"
+   def build_grief_img(self, height):
+      img = []
+      for i in range(0, height):
+         img.append("")
+      self.add_grief_left_board(img, height)
+      self.add_grief_inner(img, len(self.open_lads), height)
+      self.add_grief_right_board(img, height)
+      return img
+
+   def add_open_lads_left_board(self, img):
       img[0] += "  "
+      img[1] += "░░"
+      img[2] += "══"
 
-   def is_tone_highlighted(self, string_num, lad_num):
-      if not string_num in self.highligt_map:
-         return
-      if not lad_num in self.highligt_map[string_num]:
-         return
-      return self.highligt_map[string_num][lad_num]
+   def build_lad(self, img, string_num, lad_num):
+      color_alias = self.is_tone_highlighted(string_num, lad_num)
+      lad = ""
+      if color_alias:
+         lad += color_utils.get_open_code(color_alias, False)
+      lad += "▇"
+      if color_alias:
+         lad += color_utils.get_close_code()
+      return lad
 
-   def add_inner(self, img, width, height):
-      for i in range(1, height + 2):
-         for string_num in range(0, width):
-            color_alias = self.is_tone_highlighted(string_num, i-1)
-            if color_alias:
-               img[i] += color_utils.get_open_code(color_alias, False, True)
-            img[i] += "▇"
-            if color_alias:
-               img[i] += color_utils.get_close_code()
-            img[i] += "░"
+   def build_string_space(self, lad_num):
+      space = ""
+      is_underline = lad_num % 5 == 0
+      if is_underline:
+         space += color_utils.get_open_code('black', False)
+      space += "░"
+      if is_underline:
+         space += color_utils.get_close_code()
+      return space
+
+   def add_open_lads_inner(self, img, width):
+      for string_num in range(0, width):
+         img[1] += self.build_lad(img, string_num, 0)
+         if string_num != width - 1:
+            img[1] += "░"
       for tone in self.open_lads:
          img[0] += "{:<2}".format(tone.as_str())
+      img[2] += "══" * width
 
-   def add_right_board(self, img, height):
-      for i in range(2, height + 2):
-         img[i] += "_ "
-      img[1] += "░░ "
-      img[0] += "   "
-      for i in range(1, height + 2):
-         img[i] += str(i-1)
+   def add_open_lads_right_board(self, img):
+      img[0] += "  "
+      img[1] += "░░ 0"
+      img[2] += "══"
+
+   def add_grief_left_board(self, img, height):
+      for i in range(0, height):
+         img[i] += " _"
+
+   def add_grief_inner(self, img, width, height):
+      for i in range(0, height):
+         for string_num in range(0, width):
+            img[i] += self.build_lad(img, string_num, i+1)
+            if string_num < width - 1:
+               img[i] += self.build_string_space(i+1)
+
+   def add_grief_right_board(self, img, height):
+      for i in range(0, height):
+         img[i] += "_  "
+      for i in range(0, height):
+         img[i] += str(i+1)
 
    def print(self):
-      img = self.build_grief_img(self.height)
-      for row in img:
+      open_lads_img = self.build_open_lads_img()
+      grief_img = self.build_grief_img(self.height)
+      for row in open_lads_img:
+         print(row)
+      for row in grief_img:
          print(row)

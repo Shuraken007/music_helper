@@ -88,7 +88,7 @@ class PianoBoard:
          color_alias = 'black'
 
       for i in range(1, self.white_height+1):
-         img[i] += color_utils.get_open_code(color_alias, True, False)
+         img[i] += color_utils.get_open_code(color_alias, True)
 
    def close_color(self, img):
       for i in range(1, self.white_height+1):
