@@ -15,10 +15,10 @@ color_wheel_ryb = [
    [47,79,79], # darkslategray
    # [128, 128, 0], #Olive
    # [0, 128, 128], #Teal
+   [70, 240, 240], #Cyan
+   [30,144,255], #DodgerBlue
    [0, 0, 128], #Navy
    # [0, 130, 200], #Blue
-   [30,144,255], #DodgerBlue
-   [70, 240, 240], #Cyan
    [240, 50, 230], #Magenta
    [220, 190, 255], #Lavender
    # [240, 50, 230], #Purple
