@@ -14,8 +14,12 @@ def run_game_guitar_tone(img_boards):
    print(msg + "\n\n")
 
    for board in img_boards:
-      board.highlight_tone(tone)
       board.print()
+
+   input()
+
+   board.highlight_tone(tone)
+   board.print()
 
    print('\n')
 
