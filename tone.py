@@ -34,6 +34,6 @@ class Tone:
    def as_colored_str(self):
       as_str = ""
       as_str += color_utils.get_open_code_by_tone(self.tone, True)
-      as_str += self.as_str()
+      as_str += self.as_str().center(5)
       as_str += color_utils.get_close_code()
       return as_str

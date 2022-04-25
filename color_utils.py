@@ -1,22 +1,33 @@
 import sys
 
 # https://www.w3schools.com/colors/colors_wheels.asp
+# https://sashamaps.net/docs/resources/20-colors/
 color_wheel_ryb = [
-   [254, 39, 18 ], #"red"
-   [252, 96, 10 ], #"red_orange"
-   [251, 153, 2 ], #"orange"
-   [252, 204, 26], #"yellow_orange"
-   [254, 254, 51], #"yellow"
-   [154, 205, 50], #"yellow_green"
-   [102, 176, 50], #"green"
-   [52, 124, 152], #"blue_green"
-   [2, 71, 254  ], #"blue"
-   [68, 36, 214 ], #"blue_purple"
-   [134, 1, 175 ], #"purple"
-   [194, 20, 96 ], #"red_purple"
+   [230, 25, 75], #Red
+   [128, 0, 0], #Maroon
+   # [170, 110, 40], #Brown
+   [245, 130, 48], #Orange
+   [255, 225, 25], #Yellow
+   # [255, 250, 200], #Beige
+   # [170, 255, 195], #Mint
+   [210, 245, 60], #Mint
+   [60, 180, 75], #Green
+   [47,79,79], # darkslategray
+   # [128, 128, 0], #Olive
+   # [0, 128, 128], #Teal
+   [0, 0, 128], #Navy
+   # [0, 130, 200], #Blue
+   [30,144,255], #DodgerBlue
+   [70, 240, 240], #Cyan
+   [240, 50, 230], #Magenta
+   [220, 190, 255], #Lavender
+   # [240, 50, 230], #Purple
+   # [250, 190, 212], #Pink
 ]
 
-wheel_start_pointer = 5 # (G = yellow)
+# wheel_start_pointer = 5 # (G = yellow)
+# wheel_start_pointer = 0 # (A = red)
+wheel_start_pointer = 0
 
 color_aliases = {
    "black": 0,
