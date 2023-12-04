@@ -41,7 +41,7 @@ def fg_by_bg(bg):
 
    nThreshold = 105
    bgDelta = r*0.299 + g*0.587 + b*0.114
-   color = [0, 0, 0] if 255 - bgDelta < nThreshold else [255, 255, 255]
+   color = color_aliases["black"] if 255 - bgDelta < nThreshold else color_aliases["white"]
    return color
 
 def get_open_code_by_tone(tone_num, is_background, is_auto_fg=False):
@@ -65,15 +65,6 @@ def get_open_code_by_tone(tone_num, is_background, is_auto_fg=False):
    
    open_code = u"\u001b[{}m".format(term_color)
    return open_code
-
-# def get_open_code_by_tone(tone_num, is_background):
-#    wheel_index = (tone_num + wheel_start_pointer) % 12
-#    rgb = color_wheel_ryb[wheel_index]
-#    fill_type = 38
-#    if is_background:
-#       fill_type += 10
-#    open_code = u"\u001b[{};2;{};{};{}m".format(str(fill_type), str(rgb[0]), str(rgb[1]), str(rgb[2]))
-#    return open_code
 
 
 def get_open_code(alias, is_background):
